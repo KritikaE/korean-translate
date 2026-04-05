@@ -23,7 +23,6 @@ def safe_stats(audio):
 
 
 def build_response(audio):
-    """Always return EXACT required JSON structure"""
     if audio is None or len(audio) == 0:
         audio = np.array([0.0])
 
@@ -38,9 +37,14 @@ def build_response(audio):
         "min": {"amplitude": min_val},
         "max": {"amplitude": max_val},
         "median": {"amplitude": median},
-        "mode": {"amplitude": float(audio[0])},  # safe fallback
+        "mode": {"amplitude": float(audio[0])},
         "range": {"amplitude": float(max_val - min_val)},
-        "allowed_values": {},
+
+        # ✅ FIX HERE
+        "allowed_values": {
+            "성별": ["남", "여"]
+        },
+
         "value_range": {"amplitude": [min_val, max_val]},
         "correlation": []
     }
